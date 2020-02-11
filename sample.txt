@@ -1,0 +1,22 @@
+import xlrd
+import xlwt
+import datetime
+nb=xlwt.Workbook()
+ns=nb.add_sheet("sakib")
+wb=xlrd.open_workbook("sakib.xls")
+ws=wb.sheet_by_name("sakib")
+jj=ws.cell(214,0).value
+print(jj)
+wbt=xlrd.open_workbook("STIsingapore.xlsx")
+wst=wbt.sheet_by_name("Sheet1")
+tmp=wst.cell(144, 0).value
+print(tmp)
+for i in range(ws.nrows):
+    for j in range(0, wst.nrows):
+        jj=ws.cell(i,0).value
+        tmp=wst.cell(j, 0).value
+        if(jj==tmp):
+            dt=wst.cell(j, 4).value
+            ns.write(i,0,dt)
+            break
+nb.save("_STIsingapore.xls")
